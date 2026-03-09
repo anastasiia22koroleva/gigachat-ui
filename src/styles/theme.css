@@ -1,0 +1,52 @@
+:root {
+  /* Light theme - Нежно-розово-изумрудная палитра */
+  --color-bg-primary: #fff9f9;           /* Нежно-розовый фон */
+  --color-bg-secondary: #fff0f0;         /* Чуть темнее для контраста */
+  --color-bg-sidebar: #ffe9e9;           /* Боковая панель */
+  --color-bg-message-user: #d4f0f0;      /* Изумрудно-бирюзовый для сообщений пользователя */
+  --color-bg-message-assistant: #ffffff;  /* Белый для ассистента */
+  --color-text-primary: #2d4a4a;          /* Темно-изумрудный для текста */
+  --color-text-secondary: #5c7a7a;        /* Приглушенный изумрудный */
+  --color-text-muted: #8fa8a8;            /* Светло-изумрудный */
+  --color-border: #ffd9d9;                /* Розовая граница */
+  --color-accent: #4f9e9e;                /* Изумрудный акцент */
+  --color-accent-hover: #3d8a8a;          /* Темнее при наведении */
+  --color-error: #ff6b6b;                  /* Нежно-красный для ошибок */
+  --color-error-bg: #ffe5e5;               
+  --shadow-sm: 0 1px 2px 0 rgba(79, 158, 158, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(79, 158, 158, 0.15);
+}
+
+[data-theme="dark"] {
+  --color-bg-primary: #1f2e2e;           /* Темно-изумрудный фон */
+  --color-bg-secondary: #2a3a3a;         
+  --color-bg-sidebar: #253333;           
+  --color-bg-message-user: #3d5a5a;      /* Приглушенный изумрудный */
+  --color-bg-message-assistant: #2d4040; 
+  --color-text-primary: #ffe0e0;          /* Розоватый текст */
+  --color-text-secondary: #ffc0c0;        
+  --color-text-muted: #b3a0a0;            
+  --color-border: #3d5252;                
+  --color-accent: #6fcfcf;                /* Яркий изумрудный */
+  --color-accent-hover: #5fbfbf;          
+  --color-error: #ff9999;                  
+  --color-error-bg: #3d2e2e;               
+  --shadow-sm: 0 1px 2px 0 rgba(111, 207, 207, 0.2);
+  --shadow-md: 0 4px 6px -1px rgba(111, 207, 207, 0.25);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+}
