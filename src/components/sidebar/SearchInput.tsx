@@ -1,26 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './SearchInput.css';
 
 interface SearchInputProps {
-  onSearch: (query: string) => void;
+  value: string;
+  onChange: (query: string) => void;
   placeholder?: string;
 }
 
 export const SearchInput: React.FC<SearchInputProps> = ({
-  onSearch,
+  value,
+  onChange,
   placeholder = 'Поиск чатов...'
 }) => {
-  const [query, setQuery] = useState('');
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setQuery(value);
-    onSearch(value);
+    onChange(e.target.value);
   };
 
   const handleClear = () => {
-    setQuery('');
-    onSearch('');
+    onChange('');
   };
 
   return (
@@ -40,16 +37,18 @@ export const SearchInput: React.FC<SearchInputProps> = ({
       <input
         type="text"
         className="search-input"
-        value={query}
+        value={value}
         onChange={handleChange}
         placeholder={placeholder}
+        aria-label="Поиск чатов"
       />
 
-      {query && (
+      {value && (
         <button
+          type="button"
           className="search-clear"
           onClick={handleClear}
-          aria-label="Clear search"
+          aria-label="Очистить поиск"
         >
           ×
         </button>

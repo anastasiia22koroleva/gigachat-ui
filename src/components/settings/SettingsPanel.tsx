@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '../ui/Button';
 import { Slider } from '../ui/Slider';
 import { Toggle } from '../ui/Toggle';
 import { Settings } from '../../types';
 import { defaultSettings } from '../../mockData';
+import { clearGigaChatTokenCache } from '../../api/gigachat';
+import {
+  readGigaChatAuthFromStorage,
+  writeGigaChatAuthToStorage
+} from '../../utils/gigachatAuthStorage';
 import './SettingsPanel.css';
 
 interface SettingsPanelProps {
@@ -20,12 +25,31 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
   initialSettings = defaultSettings
 }) => {
   const [settings, setSettings] = useState<Settings>(initialSettings);
+  const [authB64, setAuthB64] = useState('');
+  const [clientId, setClientId] = useState('');
+  const [clientSecret, setClientSecret] = useState('');
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+    const a = readGigaChatAuthFromStorage();
+    setAuthB64(a.b64);
+    setClientId(a.clientId);
+    setClientSecret(a.clientSecret);
+  }, [isOpen]);
 
   const handleReset = () => {
     setSettings(defaultSettings);
   };
 
   const handleSave = () => {
+    writeGigaChatAuthToStorage({
+      b64: authB64.trim(),
+      clientId: clientId.trim(),
+      clientSecret: clientSecret.trim()
+    });
+    clearGigaChatTokenCache();
     onSave(settings);
     onClose();
   };
@@ -44,6 +68,54 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
         </div>
 
         <div className="settings-content">
+          <div className="settings-section settings-section--api">
+            <label className="settings-label">GigaChat: ключ API</label>
+            <p className="settings-hint">
+              Вставьте <strong>ключ авторизации (Base64)</strong> из{' '}
+              <a
+                href="https://developers.sber.ru/docs/ru/gigachat/quickstart/ind-using-api"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="settings-link"
+              >
+                инструкции GigaChat
+              </a>
+              . Сохраняется только в этом браузере (localStorage). Альтернатива
+              — переменные в файле <code className="settings-code">.env</code> и
+              перезапуск <code className="settings-code">npm start</code>.
+            </p>
+            <input
+              type="password"
+              className="settings-input"
+              autoComplete="off"
+              value={authB64}
+              onChange={e => setAuthB64(e.target.value)}
+              placeholder="Ключ авторизации (Base64)…"
+              aria-label="Ключ авторизации GigaChat Base64"
+            />
+            <p className="settings-hint settings-hint--secondary">
+              Или пара Client ID + Secret (если не используете один Base64-ключ):
+            </p>
+            <input
+              type="password"
+              className="settings-input settings-input--stack"
+              autoComplete="off"
+              value={clientId}
+              onChange={e => setClientId(e.target.value)}
+              placeholder="Client ID"
+              aria-label="GigaChat Client ID"
+            />
+            <input
+              type="password"
+              className="settings-input settings-input--stack"
+              autoComplete="off"
+              value={clientSecret}
+              onChange={e => setClientSecret(e.target.value)}
+              placeholder="Client Secret"
+              aria-label="GigaChat Client Secret"
+            />
+          </div>
+
           <div className="settings-section">
             <label className="settings-label">Модель</label>
             <select

@@ -1,4 +1,5 @@
-import { Chat, Message, Settings } from './types';
+import { Chat, Settings } from './types';
+import { Message } from './types/message';
 
 export const mockChats: Chat[] = [
   {
@@ -72,7 +73,8 @@ export const mockMessages: Message[] = [
   {
     id: '6',
     role: 'assistant',
-    content: 'Пожалуйста! Если у вас есть ещё вопросы, я готов на них ответить. 👋',
+    content:
+      'Пожалуйста! Если у вас есть ещё вопросы, я готов на них ответить.',
     timestamp: new Date('2024-03-09T10:35:00'),
     name: 'GigaChat'
   }

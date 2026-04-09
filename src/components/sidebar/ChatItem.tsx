@@ -59,9 +59,9 @@ export const ChatItem: React.FC<ChatItemProps> = ({
               e.stopPropagation();
               onEdit();
             }}
-            aria-label="Edit chat"
+            aria-label="Редактировать чат"
           >
-            ✎
+            Изм.
           </button>
           <button
             className="chat-item-action"
@@ -69,9 +69,9 @@ export const ChatItem: React.FC<ChatItemProps> = ({
               e.stopPropagation();
               onDelete();
             }}
-            aria-label="Delete chat"
+            aria-label="Удалить чат"
           >
-            ×
+            Уд.
           </button>
         </div>
       )}

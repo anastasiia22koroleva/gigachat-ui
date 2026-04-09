@@ -1,16 +1,12 @@
+export type { Message, MessageRole } from './message';
+export type { ChatState, ChatAction, ChatEntity } from './chatState';
+
 export interface Chat {
   id: string;
   title: string;
   lastMessageDate: Date;
+  lastMessagePreview?: string;
   isActive?: boolean;
-}
-
-export interface Message {
-  id: string;
-  role: 'user' | 'assistant';
-  content: string;
-  timestamp: Date;
-  name?: string;
 }
 
 export interface Settings {

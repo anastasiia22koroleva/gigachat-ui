@@ -3,4 +3,14 @@
   flex-direction: column;
   gap: 16px;
   padding: 24px;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .message-list {
+    padding: 16px 12px;
+    gap: 12px;
+  }
 }

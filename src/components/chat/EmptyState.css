@@ -10,9 +10,22 @@
 }
 
 .empty-state-icon {
-  font-size: 64px;
   margin-bottom: 24px;
-  opacity: 0.5;
+  opacity: 0.85;
+}
+
+.empty-state-letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-primary);
+  background-color: var(--color-bg-secondary);
+  border: 2px solid var(--color-border);
 }
 
 .empty-state-title {

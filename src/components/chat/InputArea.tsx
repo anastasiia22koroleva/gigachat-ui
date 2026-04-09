@@ -1,43 +1,39 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button } from '../ui/Button';
 import './InputArea.css';
 
 interface InputAreaProps {
   onSendMessage: (content: string) => void;
   onStopGeneration: () => void;
-  isGenerating: boolean;
+  isLoading: boolean;
 }
 
 export const InputArea: React.FC<InputAreaProps> = ({
   onSendMessage,
   onStopGeneration,
-  isGenerating
+  isLoading
 }) => {
   const [message, setMessage] = useState('');
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  useEffect(() => {
-    if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height = `${Math.min(
-        textareaRef.current.scrollHeight,
-        120
-      )}px`;
-    }
-  }, [message]);
+  const canSubmit = Boolean(message.trim()) && !isLoading;
 
   const handleSubmit = () => {
-    if (message.trim() && !isGenerating) {
-      onSendMessage(message);
-      setMessage('');
+    if (!canSubmit) {
+      return;
     }
+    onSendMessage(message.trim());
+    setMessage('');
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSubmit();
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key !== 'Enter' || e.shiftKey) {
+      return;
     }
+    e.preventDefault();
+    if (!canSubmit) {
+      return;
+    }
+    handleSubmit();
   };
 
   const handleAttach = () => {
@@ -47,42 +43,46 @@ export const InputArea: React.FC<InputAreaProps> = ({
   return (
     <div className="input-area">
       <button
+        type="button"
         className="input-attach"
         onClick={handleAttach}
-        aria-label="Attach file"
+        aria-label="Прикрепить файл"
       >
-        📎
+        <span className="input-attach-label">Влож.</span>
       </button>
 
       <div className="input-wrapper">
         <textarea
-          ref={textareaRef}
           className="input-textarea"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Введите сообщение..."
           rows={1}
+          disabled={isLoading}
+          aria-label="Текст сообщения"
         />
 
-        {isGenerating ? (
+        {isLoading ? (
           <Button
             variant="danger"
             size="medium"
+            type="button"
             onClick={onStopGeneration}
             className="input-stop"
           >
-            ⏹ Стоп
+            Стоп
           </Button>
         ) : (
           <Button
             variant="primary"
             size="medium"
+            type="button"
             onClick={handleSubmit}
-            disabled={!message.trim()}
+            disabled={!canSubmit}
             className="input-send"
           >
-            ➤
+            Отправить
           </Button>
         )}
       </div>

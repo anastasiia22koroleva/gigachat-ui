@@ -4,7 +4,8 @@
   padding: 16px;
   border-radius: 12px;
   position: relative;
-  max-width: 80%;
+  max-width: min(80%, 720px);
+  box-sizing: border-box;
 }
 
 .message.user {
@@ -54,6 +55,8 @@
 .message-content {
   flex: 1;
   min-width: 0;
+  position: relative;
+  padding-right: 0;
 }
 
 .message-header {
@@ -79,6 +82,8 @@
   font-size: 14px;
   line-height: 1.6;
   word-wrap: break-word;
+  overflow-wrap: anywhere;
+  max-width: 100%;
 }
 
 .message-markdown p {
@@ -129,40 +134,82 @@
   padding: 0;
 }
 
+.message-code-block {
+  margin: 8px 0 !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
 .message-copy {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 32px;
-  height: 32px;
-  border-radius: 6px;
-  display: flex;
+  top: 8px;
+  right: 0;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 12px;
+  border-radius: 8px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   background-color: var(--color-bg-primary);
   border: 1px solid var(--color-border);
-  color: var(--color-accent);
+  color: var(--color-primary);
   cursor: pointer;
-  transition: all 0.2s ease;
-  opacity: 0.8;
+  transition: opacity 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+  font-size: 13px;
+  font-weight: 500;
+  z-index: 1;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.message.assistant .message-copy {
+  opacity: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .message.assistant .message-copy {
+    opacity: 0;
+  }
+
+  .message.assistant:hover .message-copy,
+  .message.assistant:focus-within .message-copy,
+  .message.assistant .message-copy.message-copy--copied {
+    opacity: 1;
+  }
 }
 
 .message-copy:hover {
+  background-color: var(--color-primary);
+  color: var(--color-bg-primary);
+}
+
+.message-copy.message-copy--copied {
   opacity: 1;
-  background-color: var(--color-accent);
-  color: white;
-  transform: scale(1.1);
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 @media (max-width: 768px) {
   .message {
-    max-width: 90%;
+    max-width: min(100%, calc(100vw - 48px));
     padding: 12px;
     gap: 12px;
   }
 
   .message-copy {
-    top: 12px;
-    right: 12px;
+    top: 4px;
+    right: 0;
+    font-size: 12px;
+    min-width: 44px;
+    padding: 0 8px;
+  }
+}
+
+@media (max-width: 380px) {
+  .message {
+    max-width: 100%;
   }
 }

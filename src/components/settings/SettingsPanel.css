@@ -77,6 +77,33 @@
   margin-bottom: 24px;
 }
 
+.settings-section--api {
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.settings-input--stack {
+  margin-top: 8px;
+}
+
+.settings-hint--secondary {
+  margin-top: 12px;
+  margin-bottom: 6px;
+}
+
+.settings-link {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+.settings-code {
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+  padding: 1px 4px;
+  border-radius: 4px;
+  background-color: var(--color-bg-secondary);
+}
+
 .settings-label {
   display: block;
   font-size: 14px;

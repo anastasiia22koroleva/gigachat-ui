@@ -5,10 +5,17 @@
   width: 100%;
 }
 
+.input-attach-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
 .input-attach {
   flex-shrink: 0;
-  width: 44px;
+  min-width: 44px;
   height: 44px;
+  padding: 0 8px;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -52,10 +59,14 @@
   font-size: 14px;
   line-height: 1.5;
   resize: none;
-  min-height: 28px;
+  min-height: 44px;
   max-height: 120px;
-  padding: 0;
+  padding: 8px 0;
   font-family: inherit;
+  width: 100%;
+  min-width: 0;
+  /* Современные браузеры: рост по содержимому без inline-стилей */
+  field-sizing: content;
 }
 
 .input-textarea::placeholder {
@@ -65,9 +76,9 @@
 .input-send,
 .input-stop {
   flex-shrink: 0;
-  height: 36px;
-  min-width: 36px;
-  padding: 0 12px;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 14px;
   border-radius: 8px;
 }
 
@@ -97,20 +108,24 @@
 @media (max-width: 768px) {
   .input-area {
     gap: 8px;
+    width: 100%;
+    max-width: 100%;
   }
 
   .input-attach {
-    width: 40px;
-    height: 40px;
+    min-width: 44px;
+    height: 44px;
   }
 
   .input-wrapper {
     padding: 6px 10px;
+    flex: 1;
+    min-width: 0;
   }
 
   .input-send,
   .input-stop {
-    padding: 0 8px;
+    padding: 0 12px;
     font-size: 14px;
   }
 }

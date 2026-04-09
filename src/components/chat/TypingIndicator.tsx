@@ -1,7 +1,17 @@
 import React from 'react';
 import './TypingIndicator.css';
 
-export const TypingIndicator: React.FC = () => {
+interface TypingIndicatorProps {
+  isVisible?: boolean;
+}
+
+export const TypingIndicator: React.FC<TypingIndicatorProps> = ({
+  isVisible = true
+}) => {
+  if (!isVisible) {
+    return null;
+  }
+
   return (
     <div className="typing-indicator">
       <div className="typing-avatar">

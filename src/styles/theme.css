@@ -1,4 +1,9 @@
 :root {
+  --app-sidebar-width: 280px;
+  /* Семантические алиасы темы */
+  --color-primary: #4f9e9e;
+  --color-bg: #fff9f9;
+  --color-text: #2d4a4a;
   /* Light theme - Нежно-розово-изумрудная палитра */
   --color-bg-primary: #fff9f9;           /* Нежно-розовый фон */
   --color-bg-secondary: #fff0f0;         /* Чуть темнее для контраста */
@@ -9,7 +14,7 @@
   --color-text-secondary: #5c7a7a;        /* Приглушенный изумрудный */
   --color-text-muted: #8fa8a8;            /* Светло-изумрудный */
   --color-border: #ffd9d9;                /* Розовая граница */
-  --color-accent: #4f9e9e;                /* Изумрудный акцент */
+  --color-accent: #4f9e9e;                /* Изумрудный акцент (= --color-primary) */
   --color-accent-hover: #3d8a8a;          /* Темнее при наведении */
   --color-error: #ff6b6b;                  /* Нежно-красный для ошибок */
   --color-error-bg: #ffe5e5;               
@@ -18,6 +23,9 @@
 }
 
 [data-theme="dark"] {
+  --color-primary: #6fcfcf;
+  --color-bg: #1f2e2e;
+  --color-text: #ffe0e0;
   --color-bg-primary: #1f2e2e;           /* Темно-изумрудный фон */
   --color-bg-secondary: #2a3a3a;         
   --color-bg-sidebar: #253333;           
@@ -41,6 +49,12 @@
   box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  height: 100%;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -49,4 +63,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--color-bg-primary);
   color: var(--color-text-primary);
+}
+
+body.app-body-scroll-lock {
+  overflow: hidden;
 }

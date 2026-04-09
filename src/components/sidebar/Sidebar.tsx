@@ -10,7 +10,8 @@ interface SidebarProps {
   activeChatId: string;
   onChatSelect: (id: string) => void;
   onNewChat: () => void;
-  onSearch: (query: string) => void;
+  searchQuery: string;
+  onSearchChange: (query: string) => void;
   onEditChat: (id: string) => void;
   onDeleteChat: (id: string) => void;
 }
@@ -20,7 +21,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
   activeChatId,
   onChatSelect,
   onNewChat,
-  onSearch,
+  searchQuery,
+  onSearchChange,
   onEditChat,
   onDeleteChat
 }) => {
@@ -39,7 +41,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       <div className="sidebar-search">
-        <SearchInput onSearch={onSearch} />
+        <SearchInput
+          value={searchQuery}
+          onChange={onSearchChange}
+          placeholder="Поиск по названию и тексту…"
+        />
       </div>
 
       <ChatList
